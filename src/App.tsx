@@ -1,11 +1,20 @@
 import './App.css';
 
-import React from 'react';
+import {
+  BrowserRouter,
+  Route,
+} from 'react-router-dom';
+
+import Feed from './views/Feed/Feed';
+import UserDetails from './views/UserDetails/UserDetails';
 
 function App() {
   return (
-    <div>
-      App
+    <div className="app">
+      <BrowserRouter>
+        <Route path="/" exact component={Feed} />
+        <Route path="/userdetails" component={UserDetails} />
+      </BrowserRouter>
     </div>
   );
 }

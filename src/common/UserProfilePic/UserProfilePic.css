@@ -1,0 +1,10 @@
+.user-profile-pic {
+    padding: 5px;
+}
+
+.user-profile-pic img {
+    height: 32px;
+    width: 32px;
+    border: 1px solid lightgray;
+    border-radius: 32px;
+}
