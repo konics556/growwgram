@@ -23,6 +23,16 @@ export const fetchRandomPosts = () => {
             }
         });
 
-        dispatch({ type: 'FETCH_RANDOM_POSTS', payload: processedResponse })
+        dispatch({ type: 'FETCH_RANDOM_POSTS', payload: processedResponse });
     }
 };
+
+export const fetchUserProfilePic = (username: string) => {
+    return async function(dispatch: AppDispatch) {
+        const response: AxiosResponse = await unsplash.get('/user/' + username);
+
+        const processedResponse = response.data.profile_image.small;
+
+        dispatch({ type: 'FETCH_USER_PROFILE_PIC', payload: processedResponse});
+    }
+}
