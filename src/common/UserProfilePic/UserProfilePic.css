@@ -1,5 +1,7 @@
 .user-profile-pic {
     padding: 5px;
+    height: 42px;
+    width: 42px;
 }
 
 .user-profile-pic img {

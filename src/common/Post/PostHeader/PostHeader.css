@@ -7,8 +7,10 @@
 .user-name {
     display: flex;
     flex-direction: column;
+    font-weight: 700;
 }
 
 .user-name .location {
     font-size: small;
+    font-weight: 400;
 }

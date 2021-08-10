@@ -3,3 +3,11 @@
     justify-content: space-between;
     padding: 0px 5px;
 }
+
+.post-footer-details {
+    font-weight: 700;
+}
+
+.caption {
+    font-weight: 400;
+} 

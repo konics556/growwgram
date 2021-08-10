@@ -1,8 +1,3 @@
-.post-image {
-    border-top: 1px lightgray solid;
-    border-bottom: 1px lightgray solid;
-}
-
 .post-image img{
     width: 100%;
     height: auto;
