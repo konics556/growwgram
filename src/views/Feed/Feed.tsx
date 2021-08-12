@@ -1,43 +1,52 @@
 import './Feed.css';
 
-import React from 'react';
+import { useEffect } from 'react';
 
 import {
-  connect,
-  ConnectedProps,
+  useDispatch,
+  useSelector,
 } from 'react-redux';
 
+import Loading from '../../common/Loading/Loading';
 import Post from '../../common/Post/Post';
 import { fetchRandomPosts } from '../../store/actions';
-import { IPost } from '../../utils/types/growwgram';
 import { RootState } from '../../utils/types/redux';
+import { UnsplashPhoto } from '../../utils/types/unsplash/unsplashPhoto';
 
-const mapStateToProps = (state: RootState) => {
-    return { posts: state.posts }
-}
-
-const connector = connect(mapStateToProps, { fetchRandomPosts })
-
-class Feed extends React.Component<ConnectedProps<typeof connector>> {
-    componentDidMount() {
-        this.props.fetchRandomPosts();
-    }
-
-    renderPosts() {
-        return this.props.posts.map( (post: IPost & {id: string}) => {
+const Feed = () => {
+    const posts = useSelector((state: RootState) => state.posts);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchRandomPosts());
+    }, [])
+    console.log(posts);
+    const renderPosts = () => {
+        if (posts.isRandomPostsLoading) {
             return (
-                <Post key={post.id} username={post.username} photo={post.photo} location={post.location} caption={post.caption} likes={post.likes} />
+                <Loading />
+            );
+        }
+        else if (posts.randomPosts) {
+            return posts.randomPosts.map((post: UnsplashPhoto) => {
+                return (
+                    <Post key={post.id} username={post.user.username} photo={post.urls.regular} location={post.location.name} caption={post.description} likes={post.likes} profileImageSmall={post.user.profile_image.small} />
+                )
+            })
+        }
+        else if (posts.randomPostsError) {
+            return (
+                <div className="random-posts-error">
+                    {posts.randomPostsError}
+                </div>
             )
-        })
+        }
     }
 
-    render() {
-        return (
-            <div className="feed">
-                {this.renderPosts()}
-            </div>
-        );
-    }
+    return (
+        <div className="feed">
+            {renderPosts()}
+        </div>
+    );
 }
 
-export default connector(Feed);
+export default Feed;
