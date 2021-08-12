@@ -19,7 +19,6 @@ const Feed = () => {
     useEffect(() => {
         dispatch(fetchRandomPosts());
     }, [])
-    console.log(posts);
     const renderPosts = () => {
         if (posts.isRandomPostsLoading) {
             return (
@@ -29,7 +28,7 @@ const Feed = () => {
         else if (posts.randomPosts) {
             return posts.randomPosts.map((post: UnsplashPhoto) => {
                 return (
-                    <Post key={post.id} username={post.user.username} photo={post.urls.regular} location={post.location.name} caption={post.description} likes={post.likes} profileImageSmall={post.user.profile_image.small} />
+                    <Post key={post.id} username={post.user.username} photo={post.urls.regular} location={post.location.name} caption={post.description} likes={post.likes} profileImage={post.user.profile_image.medium} />
                 )
             })
         }

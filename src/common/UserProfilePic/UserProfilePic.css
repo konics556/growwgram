@@ -1,12 +1,25 @@
-.user-profile-pic {
+.user-profile-pic-small {
     padding: 5px;
     height: 50px;
     width: 50px;
 }
 
-.user-profile-pic img {
+.user-profile-pic-small img {
     height: 36px;
     width: 36px;
     border: 1px solid lightgray;
     border-radius: 32px;
+}
+
+.user-profile-pic-medium {
+    padding: 20px;
+    /* height: 50px;
+    width: 50px; */
+}
+
+.user-profile-pic-medium img {
+    height: 200px;
+    width: 200px;
+    border: 1px solid lightgray;
+    border-radius: 200px;
 }

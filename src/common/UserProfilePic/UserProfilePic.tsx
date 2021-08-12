@@ -1,11 +1,11 @@
 import './UserProfilePic.css';
 
-const UserProfilePic = (props: {profileImageSmall: string} ) => {
+const UserProfilePic = (props: { profileImage: string, size: string } ) => {
     return (
-        <div className="user-profile-pic">
+        <div className={`user-profile-pic-${props.size}`} >
             {/* <a href="http://localhost:3000">
             </a> */}
-            <img src={props.profileImageSmall} alt="" />
+            <img src={props.profileImage} alt="" />
         </div>
     );
 }

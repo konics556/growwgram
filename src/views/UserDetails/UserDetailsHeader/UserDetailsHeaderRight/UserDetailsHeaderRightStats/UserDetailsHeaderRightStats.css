@@ -1,0 +1,11 @@
+.user-details-header-rights-stats {
+    display: flex;
+}
+
+.user-details-header-rights-stats .stat {
+    margin-right: 20px;
+}
+
+.user-details-header-rights-stats .num {
+    font-weight: 700;
+}

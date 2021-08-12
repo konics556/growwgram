@@ -1,0 +1,33 @@
+.user-details-header-right {
+    width: 65%;
+    margin: 30px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.user-details-header-right .username {
+    margin-bottom: 20px;
+    font-weight: 300;
+    font-size:xx-large;
+}
+
+.user-details-header-right .stats {
+    margin-bottom: 20px;
+}
+
+.user-details-header-right .name {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.user-details-header-right .bio {
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.user-details-header-right .location {
+    font-weight: 400;
+    color: #9a9a9a;
+}
