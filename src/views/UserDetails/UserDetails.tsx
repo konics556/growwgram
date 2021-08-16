@@ -9,9 +9,13 @@ import {
 import { useParams } from 'react-router-dom';
 
 import Loading from '../../common/Loading/Loading';
-import { fetchUserProfile } from '../../store/actions';
+import {
+  clearUserPhotos,
+  fetchUserProfile,
+} from '../../store/actions';
 import { RootState } from '../../utils/types/redux';
 import UserDetailsHeader from './UserDetailsHeader/UserDetailsHeader';
+import UserDetailsMain from './UserDetailsMain/UserDetailsMain';
 
 const UserDetails = () => {
     const { username } = useParams<{username: string}>();
@@ -19,6 +23,7 @@ const UserDetails = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchUserProfile(username));
+        dispatch(clearUserPhotos());
     }, []);
 
     const renderUserDetails = () => {
@@ -38,6 +43,7 @@ const UserDetails = () => {
             return (
                 <div className="user-details">
                     <UserDetailsHeader userProfile={userProfile.userProfile}/>
+                    <UserDetailsMain username={userProfile.userProfile.username} totalPhotos={userProfile.userProfile.total_photos} />
                 </div>
             );
         }

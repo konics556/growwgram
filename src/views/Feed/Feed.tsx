@@ -1,6 +1,9 @@
 import './Feed.css';
 
-import { useEffect } from 'react';
+import {
+  useEffect,
+  useState,
+} from 'react';
 
 import {
   useDispatch,
@@ -10,20 +13,20 @@ import {
 import Loading from '../../common/Loading/Loading';
 import Post from '../../common/Post/Post';
 import { fetchRandomPosts } from '../../store/actions';
+import useInfiniteScroll from '../../utils/hooks/useInfiniteScroll';
 import { RootState } from '../../utils/types/redux';
 import { UnsplashPhoto } from '../../utils/types/unsplash/unsplashPhoto';
 
 const Feed = () => {
     const posts = useSelector((state: RootState) => state.posts);
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(fetchRandomPosts());
-    }, [])
     const renderPosts = () => {
-        if (posts.isRandomPostsLoading) {
+        if (posts.randomPostsError) {
             return (
-                <Loading />
-            );
+                <div className="random-posts-error">
+                    {posts.randomPostsError.status}
+                </div>
+            )
         }
         else if (posts.randomPosts) {
             return posts.randomPosts.map((post: UnsplashPhoto) => {
@@ -32,18 +35,21 @@ const Feed = () => {
                 )
             })
         }
-        else if (posts.randomPostsError) {
-            return (
-                <div className="random-posts-error">
-                    {posts.randomPostsError}
-                </div>
-            )
-        }
     }
 
+    const [hasMore] = useState(true);
+    const [page, loaderRef] = useInfiniteScroll(hasMore, posts.isRandomPostsLoading);
+
+    useEffect(() => {
+        if(posts.isRandomPostsLoading) return;
+        if(page >= 1) dispatch(fetchRandomPosts());
+    }, [page])
+
     return (
-        <div className="feed">
+        <div className="feed" >
             {renderPosts()}
+            {/* <div className="temp"></div> */}
+            {hasMore && <div ref={loaderRef}><Loading /></div>}
         </div>
     );
 }

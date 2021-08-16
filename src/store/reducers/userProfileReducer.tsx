@@ -8,6 +8,7 @@ import { UnsplashError } from '../../utils/types/unsplash/unsplashError';
 import {
   UnsplashUserProfile,
 } from '../../utils/types/unsplash/unsplashUserProfile';
+import { FETCH_USER_PROFILE } from '../actions';
 
 const initialState: UserProfile = {
     isUserProfileLoading: false,
@@ -17,7 +18,7 @@ const initialState: UserProfile = {
 
 const userProfileReducer = (state: UserProfile = initialState, action: FetchUserProfileAction) => {
     switch (action.type) {
-        case 'FETCH_USER_PROFILE':
+        case FETCH_USER_PROFILE:
             return handle(state, action, {
                 start: prevState => ({
                     ...prevState,

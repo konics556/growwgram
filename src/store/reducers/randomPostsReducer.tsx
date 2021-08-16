@@ -4,25 +4,26 @@ import {
   FetchRandomPostsAction,
   RandomPost,
 } from '../../utils/types/redux';
+import { UnsplashPhoto } from '../../utils/types/unsplash/unsplashPhoto';
+import { FETCH_RANDOM_POSTS } from '../actions';
 
 const initialState: RandomPost = {
     isRandomPostsLoading: false,
     randomPostsError: null,
-    randomPosts: null
+    randomPosts: []
 }
 
 const randomPostsReducer = (state: RandomPost = initialState, action: FetchRandomPostsAction) => {
     switch (action.type) {
-        case 'FETCH_RANDOM_POSTS':
+        case FETCH_RANDOM_POSTS:
             return handle(state, action, {
                 start: prevState => ({
                     ...prevState,
-                    isRandomPostsLoading: true,
-                    randomPostError: null
+                    isRandomPostsLoading: true
                 }),
                 finish: prevState => ({ ...prevState, isRandomPostsLoading: false }),
-                failure: prevState => ({ ...prevState, randomPostsError: (Array.isArray(action.payload.data)) ? null : action.payload.data}),
-                success: prevState => ({ ...prevState, randomPosts: (Array.isArray(action.payload.data)) ? action.payload.data : null }),
+                failure: prevState => ({ ...prevState, randomPostsError: action.payload}),
+                success: prevState => ({ ...prevState, randomPosts: [ ...prevState.randomPosts, ...action.payload.data as UnsplashPhoto[] ] }),
             });
         default:
             return state;
