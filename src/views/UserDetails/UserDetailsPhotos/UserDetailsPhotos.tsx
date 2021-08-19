@@ -58,12 +58,18 @@ function UserDetailsPhotos(props: { username: string, totalPhotos: number }) {
 
     return (
         <div className="user-details-photos">
-            <hr />
-            <div className="buttons">
-                <div className={`grid-button ${showGrid ? 'active' : ''}`} onClick={() => { setShowGrid(true) }}>GRID</div>
-                <div className={`grid-button ${!showGrid ? 'active' : ''}`} onClick={() => { setShowGrid(false) }}>POSTS</div>
+            <div className="button-container">
+                <div className={`button ${showGrid ? 'active' : ''}`} onClick={() => { setShowGrid(true) }}>GRID</div>
+                <div className={`button ${!showGrid ? 'active' : ''}`} onClick={() => { setShowGrid(false) }}>POSTS</div>
             </div>
-            {renderContent()}
+            <div className="photos">
+                {renderContent()}
+            </div>
+            <div className="small-screen posts-list">
+                {userPhotos.userPhotos.map(photo => {
+                    return <Post key={photo.id} photo={photo} />
+                })}
+            </div>
             {hasMore && <div ref={loaderRef}><Loading /></div>}
         </div>
     )

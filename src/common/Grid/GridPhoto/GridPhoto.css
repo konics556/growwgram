@@ -1,10 +1,12 @@
 .grid-photo img{
-    height: 100%;
-    width: 100%;
+    width: 300px;
+    height: 300px;
     object-fit: cover;
 }
 
 .grid-photo {
-    height: 100%;
-    width: 100%;
+    max-width: 300px;
+    max-height: 300px;
+    margin-bottom: 25px;
+    margin-top: 25px;
 }

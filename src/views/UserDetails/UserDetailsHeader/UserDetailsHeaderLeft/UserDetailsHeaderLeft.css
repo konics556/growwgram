@@ -1,4 +1,7 @@
 .user-details-header-left {
     width: 35%;
     margin: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

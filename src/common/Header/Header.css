@@ -1,0 +1,20 @@
+.header {
+    height: 55px;
+    width: 100vw;
+    border-bottom: 1px lightgray solid;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    background-color: white;
+    top: 0px;
+}
+
+.header .title {
+    background-image: url('../../utils/images/title.png');
+    background-repeat: no-repeat;
+    background-size: auto 50px;
+    height: 50px;
+    width: 140px;
+    position: relative;
+    left: 30%;
+}

@@ -1,7 +1,5 @@
 .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 300px);
-    grid-template-rows: 300px;
-    grid-template-rows: auto;
-    grid-gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }

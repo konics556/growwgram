@@ -3,12 +3,47 @@
     margin: auto;
 }
 
-.user-details-photos hr {
-    margin-bottom: 20px;
+.user-details-photos .button-container {
+    border-top: 1px lightgray solid;
+    display: flex;
+    justify-content: space-around;
+    width: 1000px;
+}
+
+.user-details-photos .button {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(143, 143, 143);
+    font-weight: 700;
+    letter-spacing: 0.3em;
+}
+
+.user-details-photos .active {
+    color: rgb(75, 75, 75);
 }
 
 .user-details-photos .photos {
     display: flex;
     justify-content: center;
     align-content: center;
+}
+
+.user-details-photos .small-screen {
+    display: none;
+}
+
+@media screen and (max-width: 1000px) {
+    .user-details-photos .button-container {
+        display: none;
+    }
+
+    .user-details-photos .photos {
+        display: none;
+    }
+
+    .user-details-photos .small-screen {
+        display: block;
+    }
 }
