@@ -43,13 +43,16 @@ const Feed = () => {
 
     const [hasMore] = useState(true);
     const [page, loaderRef] = useInfiniteScroll(hasMore, posts.isRandomPostsLoading);
-
     useEffect(() => {
         const cache = getStorage('randomPosts');
         if (cache) {
             dispatch({ type: FETCH_RANDOM_POSTS_FROM_CACHE, payload: cache });
             return;
         }
+    }, []);
+
+    
+    useEffect(() => {
         if (posts.isRandomPostsLoading) return;
         if (page >= 1) dispatch(fetchRandomPosts());
     }, [page])
