@@ -14,6 +14,7 @@ export default function useInfiniteScroll(hasMore: boolean, loading: boolean): [
     if (!loaderNode || !hasMore) return;
 
     const listener: IntersectionObserverCallback = (entries) => {
+      // console.log(page);
       if(!loading && entries[0].isIntersecting){
         setPage(prevPage => prevPage + 1);
       }

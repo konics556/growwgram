@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import { handle } from 'redux-pack';
 
 import {
@@ -8,7 +9,10 @@ import { UnsplashError } from '../../utils/types/unsplash/unsplashError';
 import {
   UnsplashUserProfile,
 } from '../../utils/types/unsplash/unsplashUserProfile';
-import { FETCH_USER_PROFILE } from '../actions';
+import {
+  CLEAR_USER_PROFILE,
+  FETCH_USER_PROFILE,
+} from '../actions';
 
 const initialState: UserProfile = {
     isUserProfileLoading: false,
@@ -26,9 +30,11 @@ const userProfileReducer = (state: UserProfile = initialState, action: FetchUser
                     userProfileError: null
                 }),
                 finish: prevState => ({ ...prevState, isUserProfileLoading: false }),
-                failure: prevState => ({ ...prevState, userProfileError: action.payload.data as UnsplashError}),
-                success: prevState => ({ ...prevState, userProfile: action.payload.data as UnsplashUserProfile }),
+                failure: prevState => ({ ...prevState, userProfileError: action.payload as UnsplashError}),
+                success: prevState => ({ ...prevState, userProfile: (action.payload as AxiosResponse<UnsplashUserProfile>).data }),
             });
+        case CLEAR_USER_PROFILE:
+            return { ...state, userProfile: null}
         default:
             return state;
     }

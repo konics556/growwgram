@@ -53,5 +53,6 @@
   },
   "devDependencies": {
     "@types/redux-pack": "^0.1.6"
-  }
+  },
+  "homepage": "http://sloppy-ink.surge.sh"
 }

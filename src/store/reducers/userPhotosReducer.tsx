@@ -1,16 +1,21 @@
+import { AxiosResponse } from 'axios';
 import { handle } from 'redux-pack';
 
 import {
   FetchUserPhotosAction,
   UserPhotos,
 } from '../../utils/types/redux';
+import { UnsplashError } from '../../utils/types/unsplash/unsplashError';
 import { UnsplashPhoto } from '../../utils/types/unsplash/unsplashPhoto';
-import { FETCH_USER_PHOTOS } from '../actions';
+import {
+  CLEAR_USER_PHOTOS,
+  FETCH_USER_PHOTOS,
+} from '../actions';
 
 const initialState: UserPhotos = {
     isUserPhotosLoading: false,
-    UserPhotosError: null,
-    UserPhotos: []
+    userPhotosError: null,
+    userPhotos: []
 }
 
 const userPhotosReducer = (state: UserPhotos = initialState, action: FetchUserPhotosAction) => {
@@ -20,12 +25,14 @@ const userPhotosReducer = (state: UserPhotos = initialState, action: FetchUserPh
                 start: prevState => ({
                     ...prevState,
                     isUserPhotosLoading: true,
-                    UserPhotosError: null
+                    userPhotosError: null
                 }),
                 finish: prevState => ({ ...prevState, isUserPhotosLoading: false }),
-                failure: prevState => ({ ...prevState, UserPhotosError: (Array.isArray(action.payload.data)) ? null : action.payload.data}),
-                success: prevState => ({ ...prevState, UserPhotos: [ ...prevState.UserPhotos, ...action.payload.data as UnsplashPhoto[] ] }),
+                failure: prevState => ({ ...prevState, userPhotosError: action.payload as UnsplashError }),
+                success: prevState => ({ ...prevState, userPhotos: [...prevState.userPhotos, ...(action.payload as AxiosResponse<UnsplashPhoto[]>).data] }),
             });
+        case CLEAR_USER_PHOTOS:
+            return { ...state, userPhotos: [] }
         default:
             return state;
     }

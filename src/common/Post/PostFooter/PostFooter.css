@@ -1,15 +1,20 @@
 .post-footer {
+    font-weight: 400;
     display: flex;
-    justify-content: space-between;
     margin: 10px 10px;
 }
 
-.post-footer-details {
-    font-weight: 700;
+.post-footer-details-left {
+    width: 80%;
 }
 
-.caption {
-    font-weight: 400;
+.post-footer-details-right {
+    text-align: end;
+    width: 20%;
+}
+
+.post-footer-details-left .username {
+    font-weight: 700;
 } 
 
 .likes {

@@ -1,16 +1,16 @@
 import './Post.css';
 
-import { IPost } from '../../utils/types/growwgram';
+import { UnsplashPhoto } from '../../utils/types/unsplash/unsplashPhoto';
 import PostFooter from './PostFooter/PostFooter';
 import PostHeader from './PostHeader/PostHeader';
 import PostImage from './PostImage/PostImage';
 
-const Post = (props: IPost) => {
+const Post = (props: {photo: UnsplashPhoto}) => {
     return (
         <div className="post">
-            <PostHeader username={props.username} location={props.location} profileImage={props.profileImage} />
-            <PostImage photo={props.photo}/>
-            <PostFooter username={props.username} caption={props.caption} likes={props.likes} />
+            <PostHeader username={props.photo.user.username} location={(props.photo.location) ? props.photo.location.name : ''} profileImage={props.photo.user.profile_image.large} />
+            <PostImage photo={props.photo.urls.regular}/>
+            <PostFooter username={props.photo.user.name} caption={props.photo.description} likes={props.photo.likes} />
         </div>
     );
 }

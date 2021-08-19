@@ -12,8 +12,12 @@ import {
 
 import Loading from '../../common/Loading/Loading';
 import Post from '../../common/Post/Post';
-import { fetchRandomPosts } from '../../store/actions';
+import {
+  FETCH_RANDOM_POSTS_FROM_CACHE,
+  fetchRandomPosts,
+} from '../../store/actions';
 import useInfiniteScroll from '../../utils/hooks/useInfiniteScroll';
+import { getStorage } from '../../utils/localStorage/localStorage';
 import { RootState } from '../../utils/types/redux';
 import { UnsplashPhoto } from '../../utils/types/unsplash/unsplashPhoto';
 
@@ -24,14 +28,14 @@ const Feed = () => {
         if (posts.randomPostsError) {
             return (
                 <div className="random-posts-error">
-                    {posts.randomPostsError.status}
+                    {posts.randomPostsError.message}
                 </div>
             )
         }
         else if (posts.randomPosts) {
             return posts.randomPosts.map((post: UnsplashPhoto) => {
                 return (
-                    <Post key={post.id} username={post.user.username} photo={post.urls.regular} location={post.location.name} caption={post.description} likes={post.likes} profileImage={post.user.profile_image.medium} />
+                    <Post key={post.id} photo={post} />
                 )
             })
         }
@@ -41,15 +45,19 @@ const Feed = () => {
     const [page, loaderRef] = useInfiniteScroll(hasMore, posts.isRandomPostsLoading);
 
     useEffect(() => {
-        if(posts.isRandomPostsLoading) return;
-        if(page >= 1) dispatch(fetchRandomPosts());
+        const cache = getStorage('randomPosts');
+        if (cache) {
+            dispatch({ type: FETCH_RANDOM_POSTS_FROM_CACHE, payload: cache });
+            return;
+        }
+        if (posts.isRandomPostsLoading) return;
+        if (page >= 1) dispatch(fetchRandomPosts());
     }, [page])
 
     return (
         <div className="feed" >
             {renderPosts()}
-            {/* <div className="temp"></div> */}
-            {hasMore && <div ref={loaderRef}><Loading /></div>}
+            {!posts.randomPostsError && hasMore && <div ref={loaderRef}><Loading /></div>}
         </div>
     );
 }

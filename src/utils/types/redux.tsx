@@ -11,13 +11,13 @@ export interface RootState {
 }
 export interface RandomPost {
     isRandomPostsLoading: boolean,
-    randomPostsError: AxiosResponse<any> | null,
+    randomPostsError: UnsplashError | null,
     randomPosts: UnsplashPhoto[]
 }
 export interface FetchRandomPostsAction {
     type: string,
     promise: Promise<AxiosResponse<any>>,
-    payload: AxiosResponse<UnsplashError | UnsplashPhoto[]>
+    payload: AxiosResponse<UnsplashPhoto[]> | UnsplashError
 }
 export interface UserProfile {
     isUserProfileLoading: boolean,
@@ -27,17 +27,17 @@ export interface UserProfile {
 export interface FetchUserProfileAction {
     type: string,
     promise: Promise<AxiosResponse<any>>,
-    payload: AxiosResponse<UnsplashError | UnsplashUserProfile>
+    payload: AxiosResponse<UnsplashUserProfile> | UnsplashError
 }
 export interface UserPhotos {
     isUserPhotosLoading: boolean,
-    UserPhotosError: UnsplashError | null,
-    UserPhotos: UnsplashPhoto[]
+    userPhotosError: UnsplashError | null,
+    userPhotos: UnsplashPhoto[]
 }
 export interface FetchUserPhotosAction {
     type: string,
     promise: Promise<AxiosResponse<any>>,
-    payload: AxiosResponse<UnsplashError | UnsplashPhoto[]>
+    payload: AxiosResponse<UnsplashPhoto[]> | UnsplashError
 }
 
 export type FetchAction = {

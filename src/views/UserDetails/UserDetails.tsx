@@ -10,12 +10,12 @@ import { useParams } from 'react-router-dom';
 
 import Loading from '../../common/Loading/Loading';
 import {
-  clearUserPhotos,
+  clearUserProfile,
   fetchUserProfile,
 } from '../../store/actions';
 import { RootState } from '../../utils/types/redux';
 import UserDetailsHeader from './UserDetailsHeader/UserDetailsHeader';
-import UserDetailsMain from './UserDetailsMain/UserDetailsMain';
+import UserDetailsPhotos from './UserDetailsPhotos/UserDetailsPhotos';
 
 const UserDetails = () => {
     const { username } = useParams<{username: string}>();
@@ -23,7 +23,9 @@ const UserDetails = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchUserProfile(username));
-        dispatch(clearUserPhotos());
+        return () => {
+            dispatch(clearUserProfile());
+        }
     }, []);
 
     const renderUserDetails = () => {
@@ -35,16 +37,16 @@ const UserDetails = () => {
         else if(userProfile.userProfileError){
             return (
                 <div className="user-profile-error">
-                    {userProfile.userProfileError}
+                    {userProfile.userProfileError.message}
                 </div>
             );
         }
         else if(userProfile.userProfile){
             return (
-                <div className="user-details">
+                <>
                     <UserDetailsHeader userProfile={userProfile.userProfile}/>
-                    <UserDetailsMain username={userProfile.userProfile.username} totalPhotos={userProfile.userProfile.total_photos} />
-                </div>
+                    <UserDetailsPhotos username={userProfile.userProfile.username} totalPhotos={userProfile.userProfile.total_photos} />
+                </>
             );
         }
     }

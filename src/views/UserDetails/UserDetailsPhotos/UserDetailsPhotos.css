@@ -1,0 +1,14 @@
+.user-details-photos {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.user-details-photos hr {
+    margin-bottom: 20px;
+}
+
+.user-details-photos .photos {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}

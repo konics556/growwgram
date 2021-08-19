@@ -1,1 +1,5 @@
-export interface UnsplashError { errors: string[] }
+export interface UnsplashError { 
+    errors: string[]
+    message: string
+    name: string
+}
