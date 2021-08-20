@@ -3,19 +3,25 @@
     width: 100vw;
     border-bottom: 1px lightgray solid;
     display: flex;
+    justify-content: space-around;
     align-items: center;
-    position: fixed;
     background-color: white;
     top: 0px;
     z-index: 2;
 }
 
 .header .title {
-    background-image: url('../../utils/images/title.png');
+    background-image: url('./images/title.png');
     background-repeat: no-repeat;
     background-size: auto 50px;
     height: 50px;
     width: 140px;
-    position: relative;
-    left: 30%;
+}
+
+.header .reload {
+    background-image: url('./images/reload.png');
+    background-repeat: no-repeat;
+    background-size: auto 25px;
+    height: 25px;
+    width: 30px;
 }

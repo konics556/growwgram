@@ -20,3 +20,7 @@ export const getStorage = (key: string) => {
     }
     return item.value;
 }
+
+export const deleteStorage = (key: string) => {
+    localStorage.removeItem(key);
+}

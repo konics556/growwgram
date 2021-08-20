@@ -8,6 +8,7 @@ export const FETCH_RANDOM_POSTS = 'FETCH_RANDOM_POSTS';
 export const FETCH_RANDOM_POSTS_FROM_CACHE = 'FETCH_RANDOM_POSTS_FROM_CACHE';
 export const FETCH_USER_PROFILE = 'FETCH_USER_PROFILE';
 export const FETCH_USER_PHOTOS = 'FETCH_USER_PHOTOS';
+export const CLEAR_RANDOM_PHOTOS = 'CLEAR_RANDOM_PHOTOS';
 export const CLEAR_USER_PHOTOS = 'CLEAR_USER_PHOTOS';
 export const CLEAR_USER_PROFILE = 'CLEAR_USER_PROFILE';
 
@@ -36,6 +37,10 @@ export const fetchUserPhotos = (username: string, pageNumber: number): FetchActi
             per_page: 9
         }
     })
+})
+
+export const clearRandomPhotos = () => ({
+    type: CLEAR_RANDOM_PHOTOS,
 })
 
 export const clearUserPhotos = () => ({

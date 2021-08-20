@@ -9,6 +9,7 @@ import {
 import { UnsplashError } from '../../utils/types/unsplash/unsplashError';
 import { UnsplashPhoto } from '../../utils/types/unsplash/unsplashPhoto';
 import {
+  CLEAR_RANDOM_PHOTOS,
   FETCH_RANDOM_POSTS,
   FETCH_RANDOM_POSTS_FROM_CACHE,
 } from '../actions';
@@ -36,10 +37,15 @@ const randomPostsReducer = (state: RandomPost = initialState, action: FetchRando
                 },
             });
         case FETCH_RANDOM_POSTS_FROM_CACHE:
-            console.log('brgu');
             return {
                 isRandomPostsLoading: false,
                 randomPosts: action.payload,
+                ranDOmPostsError: null
+            }
+        case CLEAR_RANDOM_PHOTOS:
+            return {
+                isRandomPostsLoading: false,
+                randomPosts: [],
                 ranDOmPostsError: null
             }
         default:

@@ -1,12 +1,12 @@
 .post {
     border: 1px lightgray solid;
-    margin: 10px 0px;
+    margin: 20px 0px;
     border-radius: 5px;
     background-color: #fafafa;
-    width: 600px;
+    width: 700px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
     .post {
         width: 90vw;
     }
