@@ -8,6 +8,7 @@ import {
 } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import ErrorMessage from '../../common/ErrorMessage/ErrorMessage';
 import Loading from '../../common/Loading/Loading';
 import {
   clearUserProfile,
@@ -37,7 +38,7 @@ const UserDetails = () => {
         else if(userProfile.userProfileError){
             return (
                 <div className="user-profile-error">
-                    {userProfile.userProfileError.message}
+                    <ErrorMessage message={userProfile.userProfileError.message} />
                 </div>
             );
         }

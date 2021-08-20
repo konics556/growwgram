@@ -10,6 +10,7 @@ import {
   useSelector,
 } from 'react-redux';
 
+import ErrorMessage from '../../../common/ErrorMessage/ErrorMessage';
 import Grid from '../../../common/Grid/Grid';
 import Loading from '../../../common/Loading/Loading';
 import Post from '../../../common/Post/Post';
@@ -38,7 +39,10 @@ function UserDetailsPhotos(props: { username: string, totalPhotos: number }) {
     }, [])
 
     const renderContent = () => {
-        if (userPhotos.userPhotos) {
+        if (userPhotos.userPhotosError) {
+            <ErrorMessage message={userPhotos.userPhotosError.message} />
+        }
+        else if (userPhotos.userPhotos) {
             if (showGrid) {
                 return (
                     <Grid userPhotos={userPhotos.userPhotos} />
@@ -56,6 +60,17 @@ function UserDetailsPhotos(props: { username: string, totalPhotos: number }) {
         }
     }
 
+    const renderSmallScreen = () => {
+        if (userPhotos.userPhotosError) {
+            return <ErrorMessage message={userPhotos.userPhotosError.message} />
+        }
+        else if (userPhotos.userPhotos) {
+            return userPhotos.userPhotos.map(photo => {
+                return <Post key={photo.id} photo={photo} />
+            })
+        }
+    }
+
     return (
         <div className="user-details-photos">
             <div className="button-container">
@@ -66,9 +81,7 @@ function UserDetailsPhotos(props: { username: string, totalPhotos: number }) {
                 {renderContent()}
             </div>
             <div className="small-screen posts-list">
-                {userPhotos.userPhotos.map(photo => {
-                    return <Post key={photo.id} photo={photo} />
-                })}
+                {renderSmallScreen()}
             </div>
             {hasMore && <div ref={loaderRef}><Loading /></div>}
         </div>

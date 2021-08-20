@@ -1,4 +1,12 @@
 .user-details-header {
-    max-width: 60%;
+    width: 60%;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media screen and (max-width: 800px) {
+    .user-details-header {
+        width: 90%;
+    }
 }

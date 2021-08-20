@@ -1,6 +1,6 @@
 .user-details-header-right {
     width: 65%;
-    margin: 30px;
+    padding: 30px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -30,4 +30,10 @@
 .user-details-header-right .location {
     font-weight: 400;
     color: #9a9a9a;
+}
+
+@media screen and (max-width: 800px){
+    .user-details-header-right {
+        width: auto;
+    }
 }

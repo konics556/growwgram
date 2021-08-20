@@ -3,5 +3,11 @@
     margin: 10px 0px;
     border-radius: 5px;
     background-color: #fafafa;
-    max-width: 500px;
+    width: 600px;
+}
+
+@media screen and (max-width: 600px) {
+    .post {
+        width: 90vw;
+    }
 }

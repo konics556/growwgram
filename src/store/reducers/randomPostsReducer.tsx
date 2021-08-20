@@ -30,14 +30,15 @@ const randomPostsReducer = (state: RandomPost = initialState, action: FetchRando
                 finish: prevState => ({ ...prevState, isRandomPostsLoading: false }),
                 failure: prevState => ({ ...prevState, randomPostsError: action.payload as UnsplashError }),
                 success: prevState => {
-                    setStorage('randomPosts', [...prevState.randomPosts, ...(action.payload as AxiosResponse<UnsplashPhoto[]>).data]);
-                    return { ...prevState, randomPosts: [...prevState.randomPosts, ...(action.payload as AxiosResponse<UnsplashPhoto[]>).data] }
+                    const posts = [...prevState.randomPosts, ...(action.payload as AxiosResponse<UnsplashPhoto[]>).data];
+                    if(posts.length === 10) setStorage('randomPosts', posts);
+                    return { ...prevState, randomPosts: posts };
                 },
             });
         case FETCH_RANDOM_POSTS_FROM_CACHE:
             console.log('brgu');
             return {
-                isRandomLoading: false,
+                isRandomPostsLoading: false,
                 randomPosts: action.payload,
                 ranDOmPostsError: null
             }
